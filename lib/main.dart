@@ -13,6 +13,7 @@ import 'exercise_border_radius.dart';
 import 'exercise_changefont_underline.dart';
 import 'exercise_child_container.dart';
 import 'exercise_column_icons.dart';
+import 'exercise_gridview.dart';
 import 'exercise_image_assets.dart';
 import 'exercise_insert_icon.dart';
 import 'exercise_listview.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget{
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Stack_Widgtes();
+    return Sample();
   }
 
 }
