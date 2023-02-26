@@ -1,7 +1,9 @@
 
-import 'package:first_app/exercise_image_network.dart';
-import 'package:first_app/exercise_listview_extract_widgets.dart';
+import 'package:first_app/stripe/payment_gateway.dart';
+import 'package:first_app/stripe/provider/payment_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 
 import 'animate.dart';
 import 'exercise_backgroundcolour_boxshape.dart';
@@ -25,15 +27,28 @@ import 'exercise_row.dart';
 import 'exercise_stack.dart';
 import 'exercise_textfield.dart';
 import 'exercise_textshadow_padding.dart';
+import 'package:provider/provider.dart';
 
-void main(){
- runApp(MyApp());
+void main()async{
+
+  //----load oure .env file that contain required key
+  await dotenv.load(fileName: "assets/.env");
+  //--- assing publisherble key flutter stripe
+  Stripe.publishableKey = dotenv.env["PUBLISHAVLE_KEY"]!;
+ runApp(MultiProvider(
+   providers: [
+     ChangeNotifierProvider(create: (_) => PaymentProvider()),
+   ],
+   child: MyApp(),
+ ));
+
 }
 
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "My App",
       home: HomePage(),
     );
@@ -43,7 +58,7 @@ class MyApp extends StatelessWidget{
 class HomePage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Sample();
+    return Payment();
   }
 
 }
